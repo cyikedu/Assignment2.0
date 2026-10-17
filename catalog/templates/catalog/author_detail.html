@@ -31,9 +31,10 @@
         </a>
       </p>
       {% if empty %}
-        <p><strong>No Books Available</p>
+          <p><strong>No Books Available</strong>strong></p>
       {% endif %}
 
     {% endfor %}<a href="{% url 'author_list' %}" class="btn btn-secondary">Back to Author List</a>
   </div>
+     <a href="{% url 'author_list' %}">Back</a>
 {% endblock %}

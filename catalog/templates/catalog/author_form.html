@@ -10,6 +10,7 @@
 
             <input type="submit" value="Submit"/>
         </form>
+        <a href="{% url 'book_list' %}">Back</a>
     {% else %}
         You do not have permission to access this feature
         <a href="{% url 'index' %}">Home</a>
