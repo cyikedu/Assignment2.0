@@ -1,22 +1,59 @@
+
 {% extends "catalog/base.html" %}
 
 {% block content %}
-  <h1>Book List</h1>
-  {% if book_list %}
-      <table class="table table-bordered">
-  <ul>
-    {% for book in book_list %}
-      <li>
-       <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}}){% if user.is_superuser %}
-    <a href="{% url 'book_update' book.id %}">Edit</a>
-    <a href="{% url 'book_delete' book.id %}">Delete</a>
-{% endif %}
-      </li>
-    {% endfor %}
-  
-  </ul>
-      </table>
-  {% else %}
+
+<h1>Book List</h1>
+
+{% if book_list %}
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Book Title</th>
+                <th>Author</th>
+                {% if user.is_superuser %}
+                    <th>Edit Book</th>
+                    <th>Delete Book</th>
+                {% endif %}
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for book in book_list %}
+                <tr class="table-secondary">
+
+                    <!-- Book Title -->
+                    <td>
+                        <a href="{{ book.get_absolute_url }}">
+                            {{ book.title }}
+                        </a>
+                    </td>
+
+                    <!-- Author -->
+                    <td>
+                        {{ book.author }}
+                    </td>
+
+                    {% if user.is_superuser %}
+
+                        <!-- Edit Button -->
+                        <td>
+                            <a href="{% url 'book_update' pk=book.pk %}" class="btn btn-primary">Edit Book</a></td>
+
+                        <!-- Delete Button -->
+                        <td>
+                            <a href="{% url 'book_delete' pk=book.pk %}" class="btn btn-danger">Delete Book</a></td>
+
+                    {% endif %}
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
     <p>There are no books in the library.</p>
-  {% endif %}
+{% endif %}
+
 {% endblock %}
