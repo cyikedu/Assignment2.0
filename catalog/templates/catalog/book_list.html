@@ -6,50 +6,46 @@
 <h1>Book List</h1>
 
 {% if book_list %}
-
     <table class="table table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th>Book Title</th>
-                <th>Author</th>
-                {% if user.is_superuser %}
-                    <th>Edit Book</th>
-                    <th>Delete Book</th>
-                {% endif %}
-            </tr>
-        </thead>
 
-        <tbody>
-            {% for book in book_list %}
-                <tr class="table-secondary">
+        {% for book in book_list %}
+        <tr class="table-secondary">
 
-                    <!-- Book Title -->
-                    <td>
-                        <a href="{{ book.get_absolute_url }}">
-                            {{ book.title }}
-                        </a>
-                    </td>
+            <!-- Book Title -->
+            <td>
+                <a href="{{ book.get_absolute_url }}">
+                    {{ book.title }}
+                </a>
+            </td>
 
-                    <!-- Author -->
-                    <td>
-                        {{ book.author }}
-                    </td>
+            <!-- Author -->
+            <td>
+                {{ book.author }}
+            </td>
 
-                    {% if user.is_superuser %}
+            {% if user.is_superuser %}
 
-                        <!-- Edit Button -->
-                        <td>
-                            <a href="{% url 'book_update' pk=book.pk %}" class="btn btn-primary">Edit Book</a></td>
+                <!-- Edit Book -->
+                <td>
+                    <a href="{% url 'book_update' pk=book.pk %}"
+                       class="btn btn-primary">
+                        Edit Book
+                    </a>
+                </td>
 
-                        <!-- Delete Button -->
-                        <td>
-                            <a href="{% url 'book_delete' pk=book.pk %}" class="btn btn-danger">Delete Book</a></td>
+                <!-- Delete Book -->
+                <td>
+                    <a href="{% url 'book_delete' pk=book.pk %}"
+                       class="btn btn-danger">
+                        Delete
+                    </a>
+                </td>
 
-                    {% endif %}
+            {% endif %}
 
-                </tr>
-            {% endfor %}
-        </tbody>
+        </tr>
+        {% endfor %}
+
     </table>
 
 {% else %}
