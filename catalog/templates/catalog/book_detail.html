@@ -24,8 +24,13 @@
     <img src="{{ book.book_image.url }}" width="200">
 {% endif %}
 
-<a href="{% url 'book_list' %}">Back</a>
-    <p>No Copies Available</p>{% endfor %}
-  <a href="{% url 'book_list' %}" class="btn btn-secondary">Back to Book List</a>
-  </div>
+    {% empty %}
+        <p>No Copies Available</p>
+    {% endfor %}
+</div>
+
+<a href="{% url 'book_list' %}" class="btn btn-secondary">
+    Back to Book List
+</a>
+
 {% endblock %}
